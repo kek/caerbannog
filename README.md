@@ -31,7 +31,7 @@ ActiveRecord model or works like an ActiveRecord model with regards to the
 methods `.all`, `.create!` and `#destroy`, and has two attributes `name` and
 `payload`.
 
-```
+```ruby
 Caerbannog::Queue.message_class = MessageQueueMessage
 ```
 
@@ -52,7 +52,7 @@ Call the `Caerbannog::Queue.push` method with two parameters: the message name,
 that will be used as the routing key in RabbitMQ, and the message payload,
 which should be a hash or an array.
 
-```
+```ruby
 Caerbannog::Queue.push("message name", { one_field: "one", two_field: "two" })
 ```
 
