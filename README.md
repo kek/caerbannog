@@ -43,7 +43,7 @@ bundle exec rails runner 'Caerbannog::Queue.publish'
 ```
 
 ### On the receiving side
-To receive messages you need to run a subscriber process that calls the `Caerbannog::Queue.perform` method.
+To receive messages you need to run a subscriber process that calls the `Caerbannog::Queue.subscribe` method.
 An example subscriber class might look like this.
 
 ```ruby
@@ -56,7 +56,7 @@ class CaerbannogSubscriber
       end
     rescue Bunny::TCPConnectionFailedForAllHosts => e
       ExceptionService.handle(e, :message => "Can't connect to RabbitMQ")
-      sleep wait_time # Wait for RabbitMQ to come back up
+      sleep 10        # Wait for RabbitMQ to come back up
       retry           # Try to reconnect
     end
   end
