@@ -19,7 +19,7 @@ Or install it yourself as:
 
 ## Usage
 
-The gem is ment to be used by a sender application and a receiver application.
+The gem is meant to be used by a sender application and a receiver application.
 
 ### On the sender side
 To send messages you call the `Caerbannog::Queue.push` method with a message name, that will be used
@@ -49,16 +49,14 @@ An example subscriber class might look like this.
 ```ruby
 class CaerbannogSubscriber
   def perform
-    begin
-      Caerbannog::Queue.subscribe("my-apps-queue-name", 'message-name1', 'message-name2') do |delivery_info, properties, payload|
-        parsed_message = JSON.parse(payload)
-        # Do something with the parsed messaga
-      end
-    rescue Bunny::TCPConnectionFailedForAllHosts => e
-      ExceptionService.handle(e, :message => "Can't connect to RabbitMQ")
-      sleep 10        # Wait for RabbitMQ to come back up
-      retry           # Try to reconnect
+    Caerbannog::Queue.subscribe("my-apps-queue-name", 'message-name1', 'message-name2') do |delivery_info, properties, payload|
+      parsed_message = JSON.parse(payload)
+      # Do something with the parsed messaga
     end
+  rescue Bunny::TCPConnectionFailedForAllHosts => e
+    ExceptionService.handle(e, :message => "Can't connect to RabbitMQ")
+    sleep 10        # Wait for RabbitMQ to come back up
+    retry           # Try to reconnect
   end
 end
 ```
