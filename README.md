@@ -1,7 +1,9 @@
 # Caerbannog
+[![Circle CI](https://circleci.com/gh/magplus/caerbannog.png?style=shield)](https://circleci.com/gh/magplus/caerbannog)
 
 Implements a database buffer and workers for sending and receiving events
 to/from RabbitMQ.
+
 
 ## Installation
 
