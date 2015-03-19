@@ -38,9 +38,7 @@ Caerbannog::Queue.message_class = MessageQueueMessage
 If you are using the gem from within a Rails application, you can run the
 following to generate this model:
 
-```ruby
-rails generate caerbannog
-```
+    $ rails generate caerbannog
 
 This generates a migration file, an ActiveRecord message class
 `MessageQueueMessage`, and an initializer file.
@@ -63,9 +61,7 @@ class to fetch all pushed messages and send them to RabbitMQ, and then
 If you have initialized the `Caerbannog::Queue#message_class=`, you can use
 something like this to start the publisher process:
 
-```ruby
-bundle exec rails runner 'Caerbannog::Queue.publish'
-```
+    $ bundle exec rails runner 'Caerbannog::Queue.publish'
 
 ### On the receiving side
 
@@ -90,9 +86,7 @@ end
 
 and you might run this process like
 
-```
-bundle exec rails runner 'MessageQueueWorker'
-```
+    $ bundle exec rails runner 'MessageQueueWorker'
 
 ## Development
 
