@@ -51,7 +51,7 @@ that will be used as the routing key in RabbitMQ, and the message payload,
 which should be a hash or an array.
 
 ```ruby
-Caerbannog::Queue.push("message name", { one_field: "one", two_field: "two" })
+Caerbannog::Queue.push('message name', { one_field: 'one', two_field: 'two' })
 ```
 
 We then need a background publisher that uses the `all` method of the message
@@ -72,12 +72,12 @@ error handling might look like this:
 ```ruby
 class MessageQueueWorker
   def perform
-    Caerbannog::Queue.subscribe("my-apps-queue-name", 'message-name1', 'message-name2') do |delivery_info, properties, payload|
+    Caerbannog::Queue.subscribe('my-apps-queue-name', 'message-name1', 'message-name2') do |delivery_info, properties, payload|
       parsed_message = JSON.parse(payload)
       # Do something with the parsed message
     end
   rescue Bunny::TCPConnectionFailedForAllHosts => e
-    puts "Oh no" # Handle the error somehow
+    puts 'Oh no' # Handle the error somehow
     sleep 10 # Wait for RabbitMQ to come back up
     retry # Try to reconnect
   end
