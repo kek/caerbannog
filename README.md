@@ -24,7 +24,7 @@ Or install it yourself as:
 ## Usage
 
 The gem is meant to be used by a sender application and one or more receiver
-applications.
+applications. The RabbitMQ instance used is configured via the RABBIT_URL environment variable.
 
 ### On the sender side
 
