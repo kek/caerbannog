@@ -24,21 +24,25 @@ Or install it yourself as:
 ## Usage
 
 The gem is meant to be used by a sender application and one or more receiver
-applications. The RabbitMQ instance used is configured via the RABBIT_URL environment variable.
+applications.
 
 ### On the sender side
 
-`Caerbannog::Queue` needs to be configured with a message storage class that is an
+Caerbannog needs to be configured with a message storage class that is an
 ActiveRecord model or works like an ActiveRecord model with regards to the
 methods `.all`, `.create!` and `#destroy`, and has two attributes `name` and
-`payload`.
+`payload`. It also needs a RabbitMQ read and a write URL.
 
 ```ruby
-Caerbannog::Queue.message_class = MessageQueueMessage
+Caerbannog.configure do |config|
+  config.message_class = MessageQueueMessage
+  config.rabbit_read_url = ENV['RABBIT_URL']
+  config.rabbit_write_url = ENV['RABBIT_URL']
+end
 ```
 
 If you are using the gem from within a Rails application, you can run the
-following to generate this model:
+following to generate this model and the configuration:
 
     $ rails generate caerbannog
 
