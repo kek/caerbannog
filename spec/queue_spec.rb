@@ -8,7 +8,7 @@ describe Caerbannog::Queue do
 
     it 'creates a Message' do
       message_class = stub
-      message_class.expects(:create!).with(:name => 'name', :payload => '{"a":"1"}')
+      message_class.expects(:create!).with(name: 'name', payload: '{"a":"1"}')
       Caerbannog.configure { |config| config.message_class = message_class }
       Caerbannog::Queue.push('name', { 'a' => '1' })
     end
@@ -43,9 +43,9 @@ describe Caerbannog::Queue do
       block = proc { |a,b,c| checker.has_yielded a,b,c }
 
       channel.expects(:queue).with('queue_name').returns queue
-      queue.expects(:bind).with(exchange, :routing_key => 'issue_published')
-      queue.expects(:bind).with(exchange, :routing_key => 'issue_unpublished')
-      queue.expects(:subscribe).with({ :block => true }).multiple_yields(yielded_params1, yielded_params2)
+      queue.expects(:bind).with(exchange, routing_key: 'issue_published')
+      queue.expects(:bind).with(exchange, routing_key: 'issue_unpublished')
+      queue.expects(:subscribe).with({ block: true }).multiple_yields(yielded_params1, yielded_params2)
       checker.expects(:has_yielded).with(*yielded_params1)
       checker.expects(:has_yielded).with(*yielded_params2)
 
@@ -60,10 +60,10 @@ describe Caerbannog::Queue do
       exchange, _ = stub_bunny(rabbit_write_url)
       expected_name = 'something'
       expected_payload = '{"a":"1"}'
-      message = mock('message', :name => expected_name, :payload => expected_payload)
+      message = mock('message', name: expected_name, payload: expected_payload)
       messages = [message]
 
-      exchange.expects(:publish).with(expected_payload, :routing_key => expected_name, :persistent => true)
+      exchange.expects(:publish).with(expected_payload, routing_key: expected_name, persistent: true)
       message.expects(:destroy)
 
       Caerbannog.configure { |config| config.rabbit_write_url = rabbit_write_url }
