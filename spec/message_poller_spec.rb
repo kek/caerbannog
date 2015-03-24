@@ -17,7 +17,7 @@ describe Caerbannog::MessagePoller do
       checker.expects(:has_yielded).with(one_of_two_messages).once
       checker.expects(:has_yielded).with(another_of_two_messages).once
 
-      message_poller = Caerbannog::MessagePoller.new(message_class, :wait_time => 0, :iterations => 3)
+      message_poller = Caerbannog::MessagePoller.new(message_class, wait_time: 0, iterations: 3)
       message_poller.each do |message|
         checker.has_yielded message
       end
