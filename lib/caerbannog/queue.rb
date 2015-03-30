@@ -24,7 +24,7 @@ module Caerbannog
       end
     end
 
-    def self.publish(messages = MessagePoller.new(@message_class))
+    def self.publish(messages = MessagePoller.new(Caerbannog.message_class))
       rabbitmq Caerbannog.rabbit_write_url do |exchange|
         messages.each do |message|
           exchange.publish(message.payload, routing_key: message.name, persistent: true)
