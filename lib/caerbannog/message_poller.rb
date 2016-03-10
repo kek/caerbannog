@@ -1,6 +1,6 @@
 module Caerbannog
   class MessagePoller
-    def initialize(message_class, wait_time: 5, iterations: Float::INFINITY)
+    def initialize(message_class, wait_time = 5, iterations = Float::INFINITY)
       @message_class = message_class
       @wait_time = wait_time
       @iterations = iterations

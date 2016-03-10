@@ -2,9 +2,9 @@ require 'bundler/setup'
 require 'bunny'
 require 'json'
 
-require 'caerbannog/version'
-require 'caerbannog/message_poller'
-require 'caerbannog/queue'
+require_relative 'caerbannog/version'
+require_relative 'caerbannog/message_poller'
+require_relative 'caerbannog/queue'
 
 module Caerbannog
   class ConfigurationError < StandardError; end
